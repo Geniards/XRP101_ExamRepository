@@ -18,4 +18,25 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+1. 처음 버튼이 안눌러지는 이유는 각 씬에서 EvenetSystem이 존재 안하기 때문.
+<br>해결방법) 각 씬에 EventSystem을 생성하면 버튼 이벤트 동작이 된다.
+![스크린샷 2024-11-19 155030](https://github.com/user-attachments/assets/10172136-67d8-4bae-8356-0bd12fa7557e)
+![스크린샷 2024-11-19 155038](https://github.com/user-attachments/assets/c03c3ba9-5362-4b22-8411-746e25f27a42)
+
+2. GameManager가 여러개 생성되는 문제.
+<br>해결방법) 
+ - 싱글톤 인스턴스가 이미 존재하는지 확인 후 중복 생성 방지.
+ - Gamemanager 초기화 시 중복 방지 추가.
+![스크린샷 2024-11-19 155208](https://github.com/user-attachments/assets/59cc2538-71ba-4839-a15b-8e5c598c1216)
+
+3. 팝업시 해당 팝업이 2초 뒤에 사라지지 않는 문제발생.
+<br>해결방법)
+- Time.timeScale의 경우 코루틴의 waitforsecond와 별개로 동작이 된다.
+- WaitForSecondsRealtime를 사용하여 시간이 멈출시 동작이 되게 변경한다.
+  ![스크린샷 2024-11-19 155323](https://github.com/user-attachments/assets/ee846ff3-6a1c-46d3-b9e9-1533632af3b9)
+  ![스크린샷 2024-11-19 155318](https://github.com/user-attachments/assets/5c328b37-f72a-4b10-876b-6345940ebdc3)
+
+4. 팝업이 등장시 해당 큐브의 동작이 멈추어야하지만 멈추지 않는 상황 발생.
+<br>해결방법) 큐브를 돌려주는 스크립트를 잠시 꺼두었다가 다시 켜두는 방법을 선택.
+![스크린샷 2024-11-19 155421](https://github.com/user-attachments/assets/300c3054-c2d7-4602-84dc-5fabca41954e)
+
