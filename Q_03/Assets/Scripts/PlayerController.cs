@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public int Hp { get; private set; }
 
     private AudioSource _audio;
+    private Collider _collider;
+
+    // Q3_1. 터렛의 범위에 들어가도 검출이 안되는 이유는 RigidBody를 생성하지 않고 있었기 때문.
+    // 해결방안) 플레이어의 Body에 RigidBody를 부착해준다. -> 뒤의 사운드 문제로 인하여 Collder로 받아오기로 한다.
 
     private void Awake()
     {
@@ -18,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private void Init()
     {
         _audio = GetComponent<AudioSource>();
+        _collider = GetComponentInChildren<Collider>();
     }
     
     public void TakeHit(int damage)
