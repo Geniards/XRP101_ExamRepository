@@ -17,6 +17,22 @@ public class TurretController : MonoBehaviour
         Init();
     }
 
+    /// <summary>
+    /// 플레이어 죽음시 총알 발사 정지 메서드 실행 이벤트 등록.
+    /// </summary>
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerDeath += StopFiring;
+    }
+
+    /// <summary>
+    /// 해당 컨트롤러 꺼질시 이벤트 구독 취소.
+    /// </summary>
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerDeath -= StopFiring;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("범위 안에 들어옴.");
@@ -32,9 +48,7 @@ public class TurretController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StopCoroutine(_coroutine);
-            _coroutine = null;
-            Debug.Log("플레이어 범위에서 벗어남. 사격 중지.");
+            StopFiring();
         }
     }
 
@@ -67,5 +81,18 @@ public class TurretController : MonoBehaviour
     private void Fire(Transform target)
     {
         _coroutine = StartCoroutine(FireRoutine(target));
+    }
+
+    /// <summary>
+    /// 총알 발사를 멈추는 메서드.
+    /// </summary>
+    private void StopFiring()
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            _coroutine = null;
+            Debug.Log("플레이어 사망으로 터렛 발사 중지");
+        }
     }
 }
