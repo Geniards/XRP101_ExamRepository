@@ -32,7 +32,7 @@ public class StateAttack : PlayerState
 
     public override void Exit()
     {
-        Machine.ChangeState(StateType.Idle);
+        //Machine.ChangeState(StateType.Idle);
     }
 
     private void Attack()
@@ -42,11 +42,14 @@ public class StateAttack : PlayerState
             Controller.AttackRadius
             );
 
+        // Q4_1. col 중에서 damagable가 존재 안하는 경우를 배제 안하여 NullReferenceException문제 발생. 
+        // 해결방법) damagable에서 null인 상태 체크 하기.
         IDamagable damagable;
         foreach (Collider col in cols)
         {
             damagable = col.GetComponent<IDamagable>();
-            damagable.TakeHit(Controller.AttackValue);
+            if (damagable != null)
+                damagable.TakeHit(Controller.AttackValue);
         }
     }
 
@@ -55,7 +58,10 @@ public class StateAttack : PlayerState
         yield return _wait;
 
         Attack();
-        Exit();
+        //Exit();
+        // Q4_2. 공격 동작 이후 Exit()가 동작하는데 이때 StateMachine의 ChangeState()가 동작시 다시 한번 Exit함수를 동작 무한 루프에 빠지게 되는 문제 발생. 
+        // 해결방법) Exit에서 ChangeState()를 호출 하지 않도록 로직변경.
+        Machine.ChangeState(StateType.Idle);
     }
 
 }
