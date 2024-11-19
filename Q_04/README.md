@@ -18,4 +18,12 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+- 문제상황 접근 방법) 오류 로그 및 중단점을 찍어서 해당 로직 부분의 문제발생 파악.
+
+1. col 중에서 damagable가 존재 안하는 경우를 배제 안하여 NullReferenceException문제 발생. 
+    <br>해결방법) damagable에서 null인 상태 체크 하기.
+![스크린샷 2024-11-19 144948](https://github.com/user-attachments/assets/daeb296f-3ade-40ee-8765-bc526e43ae5f)
+
+2. 공격 동작 이후 Exit()가 동작하는데 이때 StateMachine의 ChangeState()가 동작시 다시 한번 Exit함수를 동작 무한 루프에 빠지게 되는 문제 발생. 
+<br>해결방법) Exit에서 ChangeState()를 호출 하지 않도록 로직변경.
+![스크린샷 2024-11-19 145041](https://github.com/user-attachments/assets/a8e0373b-0f18-4e19-b893-f561141fbf49)
