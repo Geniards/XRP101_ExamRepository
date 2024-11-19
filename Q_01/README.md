@@ -12,4 +12,8 @@
 제시된 소스코드에서 문제가 발생하는 `원인을 모두 서술`하시오.
 
 ## 답안
-- 
+-  1. 큐브 매니저가 큐브의 위치를 생성시에 해당 부분에서 CubeController의 스크립트를 가져오지 못해서 NullReference가 발생.
+      <br>-> 해결방안) 위치를 받아오기 전에 큐브 매니저에게 CubeController의 스크립트를 부착 후 진행.
+-  2. 큐브를 생성시에 SetCubePosition을 통한 위치 값이 변경이 되었을 때, 변경된 값을 부여하지 않고 새롭게 CubeController를 가져오면서 위치 값이 초기화됨.
+      <br>-> 해결방안) 큐브 생성시에 변경된 위치 값을 넣고 생성 하도록 코드 수정.
+  ![스크린샷 2024-11-19 113033](https://github.com/user-attachments/assets/5cc04307-71e3-4b26-a67b-306b0a5daaac)
