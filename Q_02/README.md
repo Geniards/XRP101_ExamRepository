@@ -11,4 +11,12 @@
 두 가지 문제가 발생한 원인과 해결 방법을 모두 서술하시오.
 
 ## 답안
-- 
+- 문제 파악) 중단점 및 오류 코드를 찍어서 확인 결과 계속 get, set에서 오류가 발생한다고 나옴.
+          <br> StackOverFlow의 경우 재귀의 경우 발생할 수 있다는 것을 기억하고 필드를 교체해서 접근하니 해결.<br> 
+1. Get,Set Peoperty를 사용시에 필드를 지정하지 않고 사용시, Get, Set에서 자기 자신을 계속 호출하여 StackOverFlow가 발생.
+<br>-> 해결방법) Get,Set에서 사용될 지정 필드를 생성 후 해당 필드를 사용하면 해결가능.
+![스크린샷 2024-11-19 121642](https://github.com/user-attachments/assets/faac466d-29cf-4548-92ef-7da1ac661abc)
+
+2. 대각선 이동시 1.4배로 움직이는 이유는 forward 방향과 right방향으로의 힘들 동시에 받게 되어 방향 벡터가 1.4의 힘을 받게 되면서 생기는 문제.<br>
+-> 해결방안) 입력 받은 방향벡터의 길이를 1로 만들어주는 정규화 작업을 진행해야 한다.(Normalized)
+![스크린샷 2024-11-19 121650](https://github.com/user-attachments/assets/1e4bbab8-a78c-4f23-b132-9968c2fe5520)
