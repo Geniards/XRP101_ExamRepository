@@ -17,3 +17,4 @@
 -  2. 큐브를 생성시에 SetCubePosition을 통한 위치 값이 변경이 되었을 때, 변경된 값을 부여하지 않고 새롭게 CubeController를 가져오면서 위치 값이 초기화됨.
       <br>-> 해결방안) 큐브 생성시에 변경된 위치 값을 넣고 생성 하도록 코드 수정.
   ![스크린샷 2024-11-19 113033](https://github.com/user-attachments/assets/5cc04307-71e3-4b26-a67b-306b0a5daaac)
+
