@@ -37,7 +37,10 @@ public class CubeManager : MonoBehaviour
 
     private void CreateCube()
     {
-        GameObject cube = Instantiate(_cubePrefab);
+        // 2. 큐브를 생성시에 SetCubePosition을 통한 위치 값이 변경이 되었을 때, 변경된 값을 부여하지 않고 새롭게 CubeController를 가져오면서 위치 값이 초기화됨.
+        // -> 해결방안) 큐브 생성시에 변경된 위치 값을 넣고 생성 하도록 코드 수정.
+
+        GameObject cube = Instantiate(_cubePrefab, _cubeSetPoint, Quaternion.identity);
         _cubeController = cube.GetComponent<CubeController>();
         _cubeSetPoint = _cubeController.SetPoint;
     }
