@@ -12,7 +12,13 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
             if (_instance == null)
             {
                 _instance = FindObjectOfType<T>();
-                DontDestroyOnLoad(_instance.gameObject);
+                // Q5_2.GameManager가 여러개 생성되는 문제.
+                // 해결방법) 싱글톤 인스턴스가 이미 존재하는지 확인 후 중복 생성 방지.
+                //          Gamemanager 초기화 시 중복 방지 추가.
+                if (_instance != null)
+                {
+                    DontDestroyOnLoad(_instance.gameObject);
+                }
             }
             return _instance;
         }
@@ -20,7 +26,16 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 
     protected void SingletonInit()
     {
-        _instance = GetComponent<T>();
-        DontDestroyOnLoad(gameObject);
+        // Gamemanager 초기화 시 중복 방지 추가
+        if (_instance == null)
+        {
+            _instance = GetComponent<T>();
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (_instance != this)
+        {
+            // 이미 인스턴스가 존재하면 새로 생성된 객체를 파괴
+            Destroy(gameObject);
+        }
     }
 }
